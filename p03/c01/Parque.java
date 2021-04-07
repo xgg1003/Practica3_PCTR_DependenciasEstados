@@ -5,7 +5,8 @@ import java.util.Hashtable;
 
 public class Parque implements IParque{
 
-	// TODO 
+	// TODO -----------------
+	private int MAX_AFORO;
 	private int contadorPersonasTotales;
 	private Hashtable<String, Integer> contadoresPersonasPuerta;
 	
@@ -13,19 +14,20 @@ public class Parque implements IParque{
 	public Parque() {	// TODO
 		contadorPersonasTotales = 0;
 		contadoresPersonasPuerta = new Hashtable<String, Integer>();
+		MAX_AFORO = 20;
 		// TODO
 	}
 
 
-	@Override
-	public void entrarAlParque(String puerta){		// TODO
+	public synchronized void entrarAlParque(String puerta){		// TODO-------------------------
 		
 		// Si no hay entradas por esa puerta, inicializamos
 		if (contadoresPersonasPuerta.get(puerta) == null){
 			contadoresPersonasPuerta.put(puerta, 0);
 		}
 		
-		// TODO
+		// Comprobamos que el parque no este en su aforo máximo
+		comprobarAntesDeEntrar();
 				
 		
 		// Aumentamos el contador total y el individual
@@ -35,16 +37,18 @@ public class Parque implements IParque{
 		// Imprimimos el estado del parque
 		imprimirInfo(puerta, "Entrada");
 		
-		// TODO
+		// 
+		checkInvariante();		
 		
-		
-		// TODO
+		// Comprobamos que el parque no se quede en usuarios negativos
+		comprobarAntesDeSalir();
 		
 	}
 	
-	// 
-	// TODO MÃ©todo salirDelParque
-	//
+	// Igual al entrar pero salir
+	public void salirDelParque(String puerta) {
+		
+	}
 	
 	
 	private void imprimirInfo (String puerta, String movimiento){

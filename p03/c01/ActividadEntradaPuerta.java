@@ -16,7 +16,6 @@ public class ActividadEntradaPuerta implements Runnable{
 			this.parque = parque;
 		}
 
-		@Override
 		public void run() {
 			for (int i = 0; i < NUMENTRADAS; i ++) {
 				try {
