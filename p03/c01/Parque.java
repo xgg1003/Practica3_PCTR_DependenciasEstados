@@ -6,16 +6,15 @@ import java.util.Hashtable;
 public class Parque implements IParque{
 
 	// TODO -----------------
-	private final int MAX_AFORO;
+	private int maximo;
 	private int contadorPersonasTotales;
 	private Hashtable<String, Integer> contadoresPersonasPuerta;
 	
 	
-	public Parque() {	// TODO
+	public Parque(int MAX_AFORO) {	// TODO---------------
 		contadorPersonasTotales = 0;
 		contadoresPersonasPuerta = new Hashtable<String, Integer>();
-		MAX_AFORO = 20;
-		// TODO
+		MAX_AFORO = maximo;
 	}
 
 
@@ -26,7 +25,7 @@ public class Parque implements IParque{
 			contadoresPersonasPuerta.put(puerta, 0);
 		}
 		
-		// Comprobamos que el parque no este en su aforo máximo
+		// Comprobamos que el parque no este en su aforo mï¿½ximo
 		try {
 			comprobarAntesDeEntrar(contadorPersonasTotales);
 		} catch (InterruptedException e) {
@@ -103,13 +102,13 @@ public class Parque implements IParque{
 
 
 	protected void comprobarAntesDeEntrar(int contadorPersonasTotales) throws InterruptedException{	// TODO-----------
-		assert MAX_AFORO == contadorPersonasTotales : "INV: El parque está en su aforo máximo";
+		assert maximo == contadorPersonasTotales : "INV: El parque estï¿½ en su aforo mï¿½ximo";
 		//TODO-----------------
 	}
 
 
 	protected void comprobarAntesDeSalir(int contadorPersonasTotales)throws InterruptedException{// TODO---------------
-		assert 0 == contadorPersonasTotales : "INV: El parque está vacío";
+		assert 0 == contadorPersonasTotales : "INV: El parque estï¿½ vacï¿½o";
 		// TODO-----------------
 	}
 
