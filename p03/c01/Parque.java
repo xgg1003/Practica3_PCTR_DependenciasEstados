@@ -50,7 +50,7 @@ public class Parque implements IParque{
 	// Igual al entrar pero salir
 	public void salirDelParque(String puerta) {
 		
-		// Si no hay entradas por esa puerta, inicializamos
+		// Si no hay entradas por esa puerta, inicializamos.
 		if (contadoresPersonasPuerta.get(puerta) == null){
 			contadoresPersonasPuerta.put(puerta, 0);
 		}		
