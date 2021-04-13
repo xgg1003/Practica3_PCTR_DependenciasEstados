@@ -27,7 +27,7 @@ public class Parque implements IParque{
 		}
 		
 		// Comprobamos que el parque no este en su aforo máximo
-		comprobarAntesDeEntrar();
+		comprobarAntesDeEntrar(contadorPersonasTotales);
 				
 		
 		// Aumentamos el contador total y el individual
@@ -41,7 +41,7 @@ public class Parque implements IParque{
 		checkInvariante();		
 		
 		// Comprobamos que el parque no se quede en usuarios negativos
-		comprobarAntesDeSalir();
+		comprobarAntesDeSalir(contadorPersonasTotales);
 		
 	}
 	
@@ -77,16 +77,14 @@ public class Parque implements IParque{
 		// TODO
 	}
 
-	protected void comprobarAntesDeEntrar(){	// TODO
-		//
-		// TODO
-		//
+	protected void comprobarAntesDeEntrar( int contadorPersonalTotales){	// TODO-------------------------
+		assert MAX_AFORO == contadorPersonasTotales : "INV: El parque está en su aforo máximo";
+		//TODO---------------
 	}
 
-	protected void comprobarAntesDeSalir(){		// TODO
-		//
-		// TODO
-		//
+	protected void comprobarAntesDeSalir(int contadorPersonalTotales){		// TODO---------------------
+		assert 0 == contadorPersonasTotales : "INV: El parque está vacío";
+		//TODO--------------
 	}
 
 
