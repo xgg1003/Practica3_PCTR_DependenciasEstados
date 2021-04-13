@@ -6,7 +6,7 @@ import java.util.Hashtable;
 public class Parque implements IParque{
 
 	// TODO -----------------
-	private int MAX_AFORO;
+	private final int MAX_AFORO;
 	private int contadorPersonasTotales;
 	private Hashtable<String, Integer> contadoresPersonasPuerta;
 	
@@ -19,7 +19,7 @@ public class Parque implements IParque{
 	}
 
 
-	public synchronized void entrarAlParque(String puerta){		// TODO-------------------------
+	public synchronized void entrarAlParque(String puerta){	// TODO-------------------------
 		
 		// Si no hay entradas por esa puerta, inicializamos
 		if (contadoresPersonasPuerta.get(puerta) == null){
@@ -27,7 +27,12 @@ public class Parque implements IParque{
 		}
 		
 		// Comprobamos que el parque no este en su aforo máximo
-		comprobarAntesDeEntrar(contadorPersonasTotales);
+		try {
+			comprobarAntesDeEntrar(contadorPersonasTotales);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 				
 		
 		// Aumentamos el contador total y el individual
@@ -40,14 +45,33 @@ public class Parque implements IParque{
 		// 
 		checkInvariante();		
 		
-		// Comprobamos que el parque no se quede en usuarios negativos
-		comprobarAntesDeSalir(contadorPersonasTotales);
-		
 	}
 	
 	// Igual al entrar pero salir
 	public void salirDelParque(String puerta) {
 		
+		// Si no hay entradas por esa puerta, inicializamos
+		if (contadoresPersonasPuerta.get(puerta) == null){
+			contadoresPersonasPuerta.put(puerta, 0);
+		}		
+		
+		// Aumentamos el contador total y el individual
+		contadorPersonasTotales--;		
+		contadoresPersonasPuerta.put(puerta, contadoresPersonasPuerta.get(puerta)+1);
+		
+		// Imprimimos el estado del parque
+		imprimirInfo(puerta, "Salida");
+		
+		// 
+		checkInvariante();	
+		
+		// Comprobamos que el parque no se quede en usuarios negativos
+		try {
+			comprobarAntesDeSalir(contadorPersonasTotales);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	
@@ -77,14 +101,16 @@ public class Parque implements IParque{
 		// TODO
 	}
 
-	protected void comprobarAntesDeEntrar( int contadorPersonalTotales){	// TODO-------------------------
+
+	protected void comprobarAntesDeEntrar(int contadorPersonasTotales) throws InterruptedException{	// TODO-----------
 		assert MAX_AFORO == contadorPersonasTotales : "INV: El parque está en su aforo máximo";
-		//TODO---------------
+		//TODO-----------------
 	}
 
-	protected void comprobarAntesDeSalir(int contadorPersonalTotales){		// TODO---------------------
+
+	protected void comprobarAntesDeSalir(int contadorPersonasTotales)throws InterruptedException{// TODO---------------
 		assert 0 == contadorPersonasTotales : "INV: El parque está vacío";
-		//TODO--------------
+		// TODO-----------------
 	}
 
 
