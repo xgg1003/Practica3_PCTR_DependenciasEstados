@@ -10,7 +10,7 @@ public class SistemaLanzador {
 		
 		System.out.println("¡Parque abierto!");
 		
-		for (int i = 0; i < 5; i++) { /* Integer.parseInt(args[0]); i++) { */
+		for (int i = 0; i < Integer.parseInt(args[0]); i++) { //for (int i = 0; i < 5; i++) {
 			
 			String puerta = ""+((char) (letra_puerta++));
 			
@@ -20,7 +20,7 @@ public class SistemaLanzador {
 
 			
 			// TODO---------------------------
-			// Creación de hilos de entrada
+			// Creación de hilos de salida
 			ActividadSalidaPuerta salidas = new ActividadSalidaPuerta(puerta, parque);
 			new Thread (salidas).start();
 			
