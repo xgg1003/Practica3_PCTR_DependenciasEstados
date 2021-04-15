@@ -14,7 +14,7 @@ public class Parque implements IParque{
 	public Parque(int MAX_AFORO) {	// TODO---------------
 		contadorPersonasTotales = 0;
 		contadoresPersonasPuerta = new Hashtable<String, Integer>();
-		MAX_AFORO = maximo;
+		this.maximo = MAX_AFORO;
 	}
 
 
@@ -56,7 +56,7 @@ public class Parque implements IParque{
 		
 		// Aumentamos el contador total y el individual
 		contadorPersonasTotales--;		
-		contadoresPersonasPuerta.put(puerta, contadoresPersonasPuerta.get(puerta)+1);
+		contadoresPersonasPuerta.put(puerta, contadoresPersonasPuerta.get(puerta)-1);
 		
 		// Imprimimos el estado del parque
 		imprimirInfo(puerta, "Salida");
@@ -96,20 +96,22 @@ public class Parque implements IParque{
 	
 	protected void checkInvariante() {
 		assert sumarContadoresPuerta() == contadorPersonasTotales : "INV: La suma de contadores de las puertas debe ser igual al valor del contador del parte";
-		// TODO 
-		// TODO
+		// TODO------------------
+		assert maximo >= contadorPersonasTotales : "INV: El parque está en su aforo máximo";
+		// TODO----------------
+		assert 0 > contadorPersonasTotales : "INV: El parque está vacío";
 	}
 
 
 	protected void comprobarAntesDeEntrar(int contadorPersonasTotales) throws InterruptedException{	// TODO-----------
-		assert maximo == contadorPersonasTotales : "INV: El parque est� en su aforo m�ximo";
-		//TODO-----------------
+		while(contadorPersonasTotales > maximo)
+			wait();
 	}
 
 
-	protected void comprobarAntesDeSalir(int contadorPersonasTotales)throws InterruptedException{// TODO---------------
-		assert 0 == contadorPersonasTotales : "INV: El parque est� vac�o";
-		// TODO-----------------
+	protected void comprobarAntesDeSalir(int contadorPersonasTotales)throws InterruptedException{  // TODO---------------
+		while(contadorPersonasTotales <= 0)
+			wait();
 	}
 
 

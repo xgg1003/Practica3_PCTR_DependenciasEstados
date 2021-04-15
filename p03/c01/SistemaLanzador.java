@@ -5,12 +5,12 @@ public class SistemaLanzador {
 		
 		int maximo = 50;
 		
-		IParque parque = new Parque(maximo); // TODO
+		IParque parque = new Parque(maximo); // TODO--------------
 		char letra_puerta = 'A';
 		
 		System.out.println("¡Parque abierto!");
 		
-		for (int i = 0; i < Integer.parseInt(args[0]); i++) {
+		for (int i = 0; i < 5; i++) { /* Integer.parseInt(args[0]); i++) { */
 			
 			String puerta = ""+((char) (letra_puerta++));
 			
@@ -23,7 +23,6 @@ public class SistemaLanzador {
 			// Creación de hilos de entrada
 			ActividadSalidaPuerta salidas = new ActividadSalidaPuerta(puerta, parque);
 			new Thread (salidas).start();
-			
 			
 		}
 	}	
